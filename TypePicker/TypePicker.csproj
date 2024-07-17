@@ -1,48 +1,43 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Project Sdk="Microsoft.NET.Sdk">
-    <PropertyGroup>
-        <ProjectGuid>{2064F4CE-0C80-431D-A009-041C5DFCEEA6}</ProjectGuid>
-        <OutputType>Library</OutputType>
-        <AppDesignerFolder>Properties</AppDesignerFolder>
-        <RootNamespace>TypePicker</RootNamespace>
-        <AssemblyName>TypePicker</AssemblyName>
-        <TargetFramework>net472</TargetFramework>
-        <FileAlignment>512</FileAlignment>
-        <Deterministic>true</Deterministic>
-        <GamePath>$(MSBuildThisFileDirectory)Resonite</GamePath>
-        <GamePath Condition="Exists('C:\Program Files (x86)\Steam\steamapps\common\Resonite\')">C:\Program Files (x86)\Steam\steamapps\common\Resonite\</GamePath>
-        <GamePath Condition="Exists('$(HOME)/.steam/steam/steamapps/common/Resonite/')">$(HOME)/.steam/steam/steamapps/common/Resonite/</GamePath>
-		<GamePath Condition="Exists('E:\Programs\Steam\steamapps\common\Resonite')">E:\Programs\Steam\steamapps\common\Resonite\</GamePath>
-        <GamePath Condition="Exists('E:\SteamLibrary\steamapps\common\Resonite')">E:\SteamLibrary\steamapps\common\Resonite\</GamePath>
-        <GamePath Condition="Exists('D:\SteamLibrary\steamapps\common\Resonite')">D:\SteamLibrary\steamapps\common\Resonite\</GamePath>
-        <CopyLocal>false</CopyLocal>
-        <CopyToMods Condition="'$(CopyToMods)'==''">true</CopyToMods>
-        <DebugSymbols Condition="'$(Configuration)'=='Release'">false</DebugSymbols>
-        <DebugType Condition="'$(Configuration)'=='Release'">None</DebugType>
-        <Authors>TheJebForge</Authors>
-        <PackageId>TypePicker</PackageId>
-        <Version>2.0.3</Version>
-    </PropertyGroup>
-    <ItemGroup>
-        <Reference Include="HarmonyLib">
-            <HintPath>$(GamePath)rml_libs\0Harmony.dll</HintPath>
-            <HintPath Condition="Exists('$(GamePath)0Harmony.dll')">$(GamePath)0Harmony.dll</HintPath>
-        </Reference>
-        <Reference Include="FrooxEngine">
-            <HintPath>$(GamePath)Resonite_Data\Managed\FrooxEngine.dll</HintPath>
-        </Reference>
-        <Reference Include="Elements.Core">
-            <HintPath>$(GamePath)Resonite_Data\Managed\Elements.Core.dll</HintPath>
-        </Reference>
-        <Reference Include="Elements.Assets">
-            <HintPath>$(GamePath)Resonite_Data\Managed\Elements.Assets.dll</HintPath>
-        </Reference>
-        <Reference Include="ResoniteModLoader">
-            <HintPath>$(GamePath)Libraries\ResoniteModLoader.dll</HintPath>
-        </Reference>
-    </ItemGroup>
-    <Target Name="PostBuild" AfterTargets="PostBuildEvent" Condition="'$(CopyToMods)'=='true'">
-        <Copy SourceFiles="$(TargetPath)" DestinationFolder="$(GamePath)rml_mods" />
-        <Message Text="Copied $(TargetFileName) to $(GamePath)rml_mods" Importance="high" />
-    </Target>
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net462</TargetFramework>
+    <AssemblyTitle>TypePicker</AssemblyTitle>
+    <AssemblyFileName>$(AssemblyTitle).dll</AssemblyFileName>
+    <RootNamespace>TypePicker</RootNamespace>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+    <PackageId>TypePicker</PackageId>
+    <Title>Type Picker</Title>
+    <Authors>TheJebForge; Banane9</Authors>
+    <Version>3.0.0-beta</Version>
+    <Description>This MonkeyLoader mod for Resonite adds a type picker into Component Selector / ProtoFlux Node Selector by utilizing Component Selector Additions.</Description>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageProjectUrl>https://github.com/ResoniteModdingGroup/TypePicker</PackageProjectUrl>
+    <PackageTags>mod; mods; monkeyloader; resonite; component; attacher; protoflux; node; type; picker</PackageTags>
+  </PropertyGroup>
+
+  <Target Name="CopyPackage" AfterTargets="Pack">
+    <Copy Condition="'$(CopyToLibraries)'=='true'" SourceFiles="$(OutputPath)..\$(PackageId).$(PackageVersion).nupkg" DestinationFiles="$(ResonitePath)\MonkeyLoader\Mods\$(PackageId).nupkg" />
+    <Message Condition="'$(CopyToLibraries)'=='true'" Text="Copied '$(OutputPath)..\$(PackageId).$(PackageVersion).nupkg' to '$(ResonitePath)\MonkeyLoader\Mods\$(PackageId).nupkg'" Importance="high" />
+  </Target>
+
+  <ItemGroup>
+    <None Include="..\README.md" Pack="true" PackagePath="" />
+    <None Include="Locale\*" Pack="true" PackagePath="content/Locale/" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="ComponentSelectorAdditions" Version="0.3.1-beta" />
+    <PackageReference Include="MonkeyLoader" Version="0.19.1-beta" />
+    <PackageReference Include="MonkeyLoader.GamePacks.Resonite" Version="0.17.0-beta" />
+    <PackageReference Include="PolySharp" Version="1.14.1">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Resonite.Elements.Core" Version="1.1.0" />
+    <PackageReference Include="Resonite.FrooxEngine" Version="2024.7.11.1293" />
+  </ItemGroup>
 </Project>
