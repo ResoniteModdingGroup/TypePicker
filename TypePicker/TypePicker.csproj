@@ -10,7 +10,7 @@
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
     <PackageId>TypePicker</PackageId>
     <Title>Type Picker</Title>
-    <Authors>TheJebForge; Banane9</Authors>
+    <Authors>Banane9; TheJebForge</Authors>
     <Version>3.0.0-beta</Version>
     <Description>This MonkeyLoader mod for Resonite adds a type picker into Component Selector / ProtoFlux Node Selector by utilizing Component Selector Additions.</Description>
     <PackageReadmeFile>README.md</PackageReadmeFile>
