@@ -1,0 +1,15 @@
+{
+  "localeCode": "en",
+  "authors": [ "Banane9" ],
+  "messages": {
+    "TypePicker.BaseType": "Base Type",
+    "TypePicker.InnerType": "Inner Type",
+
+    "TypePicker.CastTo": "Cast to:",
+
+    "TypePicker.SyncRef": "Reference",
+    "TypePicker.SyncRefInner": "Reference Target",
+    "TypePicker.Field": "Field",
+    "TypePicker.FieldInner": "Field Value"
+  }
+}
